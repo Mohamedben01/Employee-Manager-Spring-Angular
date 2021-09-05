@@ -1,0 +1,77 @@
+ 
+<div class="nav">
+    <div class="logo">
+        <h2>Employee Manager</h2>
+    </div>
+    <div class="search">
+        <input type="text" (ngModelChange)="searchEmployee(key.value)" #key="ngModel" ngModel name="key" placeholder="Search here..."/>
+    </div>
+    <div class="addIcon">
+        <i id="addEmpl" class="fas fa-plus"></i>Add Employee
+    </div>
+</div>
+
+ <div class="container">
+     <div *ngIf="msg != null" class="msgBox">
+         <p>{{msg}}</p>
+     </div>
+        <div *ngFor="let employee of employees">
+            <div class="card">
+            <div class="icons">
+                <i (click)="onDeleteEmployee(employee.id)" class="fas fa-trash"></i>
+                <i class="fas fa-pencil-alt"></i>
+            </div>
+            <div class="content">
+                <div class="imgBox">
+                    <img src={{employee.imageUrl}}>
+                </div>
+                <h2>{{employee.fullName}}</h2>
+                <h3>{{employee.jobTitle}}</h3>
+                <div class="info">
+                    <ul>
+                        <li>{{employee.email}}</li>
+                        <li>{{employee.phone}}</li>
+                        <li>{{employee.employeeCode}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+     <!-- Add Employee Form Model -->
+        <div class="employeeForm">
+            <div *ngIf="message == 'true'" class="success">
+                <i class="fas fa-check-double"></i>
+            </div>
+            <div *ngIf="message == 'false'" class="error">
+                <i class="fas fa-exclamation"></i>
+            </div>
+            <i id="close" class="fas fa-times"></i>
+            <form #employee="ngForm" (ngSubmit)="onAddEmployee(employee)">
+                <h2>Add Employee</h2>
+                <div class="input-group">
+                    <label for="fullName">Name:</label><br/>
+                    <input ngModel name="fullName" id="fullName" type="text">
+                </div>
+                <div class="input-group">
+                    <label for="jobTitle">Job Title:</label><br/>
+                    <input ngModel name="jobTitle" id="jobTitle" type="text">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label><br/>
+                    <input ngModel name="email" id="email" type="text">
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone:</label><br/>
+                    <input ngModel name="phone" id="phone" type="text">
+                </div>
+                <div class="input-group">
+                    <label for="imageUrl">Image:</label><br/>
+                    <input ngModel name="imageUrl" id="imageUrl" type="text">
+                </div>
+                <div class="btn">
+                    <button [disabled]="employee.invalid" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+  
